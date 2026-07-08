@@ -62,6 +62,15 @@ def validar_longitud_minima(cadena:str,minimo:int) -> bool:
     return retorno
 
 def validar_opcion(opcion:str) -> bool:
+    """Valida que la opción ingresada por el usuario sea un número 
+    dentro del rango permitido para el menú (del 1 al 9).
+
+    Args:
+        opcion (str): Cadena de texto que representa la opción ingresada.
+
+    Returns: bool: True si la opción es válida y está dentro del rango [1, 9], 
+             False en caso contrario.
+    """
 
     retorno = True
 
@@ -72,3 +81,4 @@ def validar_opcion(opcion:str) -> bool:
         retorno = False
 
     return retorno
+
