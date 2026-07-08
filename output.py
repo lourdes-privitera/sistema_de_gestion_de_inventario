@@ -1,3 +1,7 @@
+from utilidades import(
+    obtener_estado,
+    buscar_producto
+)
 
 def mostrar_menu() -> None:
     print("=========== GESTIÓN DE INVENTARIO ===========")  
@@ -12,27 +16,8 @@ def mostrar_menu() -> None:
     print("8.   Guardar producto")
     print("9.   Salir")
 
-def obtener_estado(stock:int,stock_minimo:int)-> str:
-    """Determina el estado del stock de un producto.
 
-    Args:
-        stock (int): Cantidad disponible.
-        stock_minimo (int): Stock mínimo permitido.
-
-    Returns:
-        str: Estado del producto.
-    """
-
-    if stock == 0:
-        estado = "Sin Stock"
-    elif stock <= stock_minimo:
-       estado = "Stock Bajo"
-    else : #stock > stock_minimo
-       estado = "Stock Normal"
-
-    return estado
-
-#la reutilizo para todas las opciones que muestran producto
+#la reutilizo para todas las opciones que muestran producto (solo imprime 1 producto)
 def mostrar_producto(codigo:str, producto:dict) -> None:
 
     estado = obtener_estado( producto["stock_disponible"],producto["stock_minimo"])
@@ -45,3 +30,28 @@ def mostrar_producto(codigo:str, producto:dict) -> None:
     print(f"Stock mínimo: {producto['stock_minimo']}")
     print(f"Proveedor: {producto['proveedor']}")
     print(f"Estado: {estado}")
+
+def mostrar_busqueda_producto(codigo:str,inventario:dict) -> None:
+    """Busca un producto y muestra su información."""
+
+    producto = buscar_producto(inventario, codigo)
+
+    if producto != None:
+        mostrar_producto(codigo, producto)
+    else:
+        print("Producto inexistente.")
+
+def mostrar_productos_categoria(productos:dict) -> None:
+
+    if len(productos) == 0:
+
+        print("No existen productos registrados en esa categoría.")
+
+    else:
+
+        for codigo, producto in productos.items():
+
+            mostrar_producto(codigo, producto)
+
+            print("------------------------")
+

@@ -41,15 +41,25 @@ def listar_productos(inventario:dict) -> None:
 
         print("--------------------------------")
 
+def buscar_productos_por_categoria(inventario:dict, categoria:str) -> dict:
+    """Busca todos los productos pertenecientes a una categoría.
+
+    Args:
+        inventario (dict): Inventario de productos.
+        categoria (str): Categoría buscada.
+
+    Returns:
+        dict: Productos encontrados dentro de la categoría.
+    """
+
+    productos_encontrados = {}
+
+    for codigo, producto in inventario.items():
+
+        if producto["categoria"] == categoria:
+            productos_encontrados[codigo] = producto #lo agregamos 
+
+    return productos_encontrados
 
 
 
-
-
-
-
-
-
-# buscar_producto()
-# modificar_producto()
-# eliminar_producto()
