@@ -14,12 +14,17 @@ def cargar_codigo (inventario:dict) -> str:
         str: Código válido y no repetido.
     """
 
-    codigo = input("Ingrese el codigo del producto: ") 
+    codigo = input("Ingrese el código del producto: ")
 
-    while codigo in inventario: #me fijo que no exist el codigo enmi inventario
-        print("ERROR. Ese código ya existe.")
-        codigo = input("Reingrese código del producto: ") 
-    
+    while codigo in inventario or validar_longitud_minima(codigo,1) == False:
+
+        if validar_longitud_minima(codigo,1) == False:
+            print("ERROR. El código no puede estar vacío.")
+        else:
+            print("ERROR. Ese código ya existe.")
+
+        codigo = input("Reingrese código del producto: ")
+
     return codigo
 
 def pedir_cadena(mensaje:str) -> str:
@@ -58,13 +63,13 @@ def ingresar_categoria() -> str:
     """
     return pedir_cadena("Ingresar categoria del producto: ")
 
-def ingresar_proovedor() -> str:
-    """Solicita y valida el proovedor del producto.
+def ingresar_proveedor() -> str:
+    """Solicita y valida el proveedor del producto.
 
     Returns:
         str: Proovedor del producto.
     """
-    return pedir_cadena("Ingresar proveedor del producto: ")
+    return pedir_cadena("Ingresar provedoor del producto: ")
 
 def pedir_numero(mensaje:str, minimo:float) -> float:
     """Solicita un número y repite el ingreso hasta obtener un valor válido.
@@ -146,8 +151,7 @@ def pedir_informacion_producto(inventario:dict) -> tuple:
         "precio" : ingresar_precio(),
         "stock_disponible" : ingresar_stock_disponible(),
         "stock_minimo" :ingresar_stock_minimo(),
-        "proveedor" : ingresar_proovedor()      
+        "proveedor" : ingresar_proveedor()      
     }
 
     return codigo, informacion_producto        
-  
