@@ -1,31 +1,44 @@
-def validar_entero(texto: str, valor_minimo:int) -> bool:
-    """Valida que una cadena represente un número entero mayor o igual
+def validar_numero(texto: str, valor_minimo:float) -> bool:
+    """Valida que una cadena represente un número mayor o igual
     al valor mínimo indicado.
+
+    La función admite números enteros y decimales con un único
+    punto decimal.
 
     Args:
         texto (str): Cadena a validar.
-        valor_minimo (int): Límite inferior permitido.
-        
+        valor_minimo (float): Límite inferior permitido.
+
     Returns:
-        bool: True si el texto es un entero dentro del rango, False en caso contrario.
+        bool: True si la cadena representa un número válido mayor
+        o igual al mínimo indicado. False en caso contrario.
     """
     retorno = False
-    es_entero = True
-        
-    for c in texto: # Validar que todos los caracteres sean dígitos numericos
-        if not ("0" <= c <= "9"):
-            es_entero = False
-   
-    if es_entero:  # Si es entero, validamos el rango numérico
-        numero = int(texto)
+    es_numero = True
+    cantidad_puntos = 0
 
-        if valor_minimo <= numero :
+    for c in texto:
+
+        if c == ".":
+            cantidad_puntos += 1
+
+        if not ("0" <= c <= "9") and c != ".":
+            es_numero = False
+
+    if cantidad_puntos > 1:
+        es_numero = False
+
+    if es_numero:
+
+        numero = float(texto)
+
+        if numero >= valor_minimo:
             retorno = True
         else:
-            print(f"NO SE ADMITEN NEGATIVOS.")
+            print(f"ERROR: El número debe ser mayor o igual a {valor_minimo}.")
 
     else:
-        print("SE DEBE INGRESAR UN NUMERO ENTERO")
+        print("ERROR: Debe ingresar un número válido.")
 
     return retorno
 
@@ -48,3 +61,14 @@ def validar_longitud_minima(cadena:str,minimo:int) -> bool:
 
     return retorno
 
+def validar_opcion(opcion:str) -> bool:
+
+    retorno = True
+
+    if validar_numero(opcion,1) == False:
+        retorno = False
+
+    elif float(opcion) > 9:
+        retorno = False
+
+    return retorno

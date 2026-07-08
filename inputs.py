@@ -1,6 +1,6 @@
 from validaciones import(
     validar_longitud_minima,
-    validar_entero
+    validar_numero
 )
 
 def cargar_codigo (inventario:dict) -> str:
@@ -66,7 +66,7 @@ def ingresar_proovedor() -> str:
     """
     return pedir_cadena("Ingresar proveedor del producto: ")
 
-def pedir_numero(mensaje:str, minimo:int) -> int:
+def pedir_numero(mensaje:str, minimo:float) -> float:
     """Solicita un número y repite el ingreso hasta obtener un valor válido.
         - Que el ingreso no esté vacío.
         - Que contenga solo caracteres numéricos.
@@ -91,19 +91,19 @@ def pedir_numero(mensaje:str, minimo:int) -> int:
             print("ERROR: NO PUEDE ESTAR VACÍO")
             ingreso_valido = False
 
-        if ingreso_valido and validar_entero(numero,minimo) == False:
+        if ingreso_valido and validar_numero(numero,minimo) == False:
             ingreso_valido = False
 
         if ingreso_valido == False:
             numero = input("Reingrese un número válido: ")
 
-    return int(numero)
+    return float(numero)
 
-def ingresar_precio() -> int:
+def ingresar_precio() -> float:
     """Solicita el precio y lo valida.
 
     Returns:
-        int: Precio del producto mayor a 0.
+        float: Precio del producto mayor a 0.
     """
     return pedir_numero("Ingrese el precio del producto: ", 1)
 
@@ -111,17 +111,17 @@ def ingresar_stock_disponible() -> int:
     """Solicita el precio y lo valida.
 
     Returns:
-        int: Precio del producto mayor a 0.
+        float: Precio del producto mayor a 0.
     """
-    return pedir_numero("Ingrese el Stock disponible del producto: ", 0)
+    return int(pedir_numero("Ingrese el Stock disponible del producto: ", 0))
 
 def ingresar_stock_minimo() -> int:
     """Solicita el precio y lo valida.
 
     Returns:
-        int: Precio del producto mayor a 0.
+        float: Precio del producto mayor a 0.
     """
-    return pedir_numero("Ingrese el Stock mínimo del producto: ", 0)
+    return int(pedir_numero("Ingrese el Stock mínimo del producto: ", 0))
 
 def pedir_informacion_producto(inventario:dict) -> tuple:
     """Solicita todos los datos necesarios para registrar un producto.
